@@ -16,7 +16,8 @@ public class PlayerInput : MonoBehaviour
     private bool isFireBallAttack = false;
     public bool p_isFireBallAttack { get { return isFireBallAttack; } set { isFireBallAttack = value; } }
 
-
+    public AudioClip clip1; //무기 휘두르는 사운드
+    public AudioClip clip2; //파이어볼 나갈 때 사운드
     private void Update() // 프레임마다 입력값 확인
     {
         GetMoveInput(); 
@@ -42,19 +43,21 @@ public class PlayerInput : MonoBehaviour
 
     private void GetAttackInput() // 공격
     {
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             if (isAttack == false)
                 isAttack = true; // 공격 true로 설정.
+
+            SoundManager.instance.SFXPlay("hit", clip1);
         }
 
-        if (Input.GetKey(KeyCode.W)) //파이어볼 발사
+        if (Input.GetKeyDown(KeyCode.W)) //파이어볼 발사
         {
             if(isFireBallAttack == false)
             {
                 isFireBallAttack = true;
             }
-
+            SoundManager.instance.SFXPlay("fire", clip2);
         }
 
     }
