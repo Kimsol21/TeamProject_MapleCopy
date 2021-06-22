@@ -9,6 +9,9 @@ public class Enemy : MonoBehaviour
     private Transform target;
     public Transform P_target { get { return target; } set { target = value; } }
 
+    public AudioClip clip1;//검에 맞는 사운드
+    public AudioClip clip2;//파이어볼에 맞는 사운드
+    
     void Start()
     {
         SetState(new MoveState());
@@ -16,7 +19,8 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        currentState.Update();       
+        currentState.Update();
+       
     }
 
     public void SetState(State nextState)
@@ -28,4 +32,5 @@ public class Enemy : MonoBehaviour
         currentState = nextState;
         currentState.OnEnter(this);
     }
+        
 }

@@ -8,7 +8,8 @@ public class SoundManager : MonoBehaviour
     public AudioMixer mixer;
     public static SoundManager instance;
 
-        private void Awake()
+    
+    private void Awake()
     {
         if(instance==null)
         {
@@ -29,7 +30,9 @@ public class SoundManager : MonoBehaviour
         audioSource.clip = clip;
         audioSource.Play();
 
-        Destroy(go, clip.length);
+        float leng = clip.length;
+        //Destroy(go, clip.length);
+        Destroy(go, leng);
     }
 
     public void BGMSoundVolume(float val)
