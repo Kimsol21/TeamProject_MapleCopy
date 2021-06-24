@@ -10,7 +10,7 @@ public class AttackState : State
     public void OnEnter(Enemy enemy)
     {
         this.enemy = enemy;
-        animator = this.enemy.GetComponent<Animator>();
+        animator = enemy.GetComponent<Animator>();
     }
 
     public void Update()
@@ -20,15 +20,20 @@ public class AttackState : State
 
     public void OnExit()
     {
-        animator.SetBool("isAttack", false);
     }
 
     public void Attack()
     {
         if (AttackRange.Instance.isAttacking == true)
+        {
             animator.SetBool("isAttack", true);
+        }
+            
         else
+        {
             animator.SetBool("isAttack", false);
+        }
+            
     }
 
     
