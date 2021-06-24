@@ -10,6 +10,9 @@ public class PlayerInput : MonoBehaviour
     private bool isJumping = false;  // 점프중인지 판별
     public bool p_isJumping { get { return isJumping; } set { isJumping = value; } }
 
+    private bool isDoubleJumping = false;  // 더블 점프중인지 판별
+    public bool p_isDoubleJumping { get { return isDoubleJumping; } set { isDoubleJumping = value; } }
+
     private bool isAttack = false;  // 공격중인지 판별
     public bool p_isAttack { get { return isAttack; } set { isAttack = value; } }
 
@@ -34,10 +37,13 @@ public class PlayerInput : MonoBehaviour
 
     private void GetJumpInput() // 점프
     {
-        if (Input.GetButtonDown("Jump"))
-        {
-            if ( isJumping == false) // 점프중이 아닐때만
-                isJumping = true; // 점프 true로 설정.
+        if (isJumping == false && Input.GetButtonDown("Jump"))
+            isJumping = true;
+
+        if (isJumping == true && Input.GetButtonDown("Jump"))
+        {           
+            if (PlayerMove.Instance.JumpCount == 1) //여기 두번씩 실행됨.
+                isDoubleJumping = true;       
         }
     }
 

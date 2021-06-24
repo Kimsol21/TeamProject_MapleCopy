@@ -19,8 +19,7 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        currentState.Update();
-       
+        currentState.Update();    
     }
 
     public void SetState(State nextState)

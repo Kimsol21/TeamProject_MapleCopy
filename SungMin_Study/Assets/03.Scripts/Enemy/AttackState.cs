@@ -5,26 +5,31 @@ using UnityEngine;
 public class AttackState : State
 {
     private Enemy enemy;
-    [SerializeField]
-    private float attackTime = 0.3f;
+    private Animator animator;
 
     public void OnEnter(Enemy enemy)
     {
-
+        this.enemy = enemy;
+        animator = this.enemy.GetComponent<Animator>();
     }
 
     public void Update()
     {
-        //StartCoroutine("Attack");
+        Attack();
     }
 
     public void OnExit()
     {
-
+        animator.SetBool("isAttack", false);
     }
 
-    IEnumerator Attack()
+    public void Attack()
     {
-        yield return null;
+        if (AttackRange.Instance.isAttacking == true)
+            animator.SetBool("isAttack", true);
+        else
+            animator.SetBool("isAttack", false);
     }
+
+    
 }
