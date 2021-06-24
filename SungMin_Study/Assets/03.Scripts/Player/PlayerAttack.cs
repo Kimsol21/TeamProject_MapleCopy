@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    private PlayerInput playerInput;
+    public static PlayerAttack Instance;
+    private PlayerInput playerInput;    
+
     public float attackTime = 0.3f; // 공격 애니메이션 실행 시간
 
     private bool isAttacking = false;
@@ -12,7 +14,9 @@ public class PlayerAttack : MonoBehaviour
 
     void Start()
     {
+        Instance = this;
         playerInput = GetComponent<PlayerInput>();
+
     }
 
     private void Update()
@@ -24,6 +28,7 @@ public class PlayerAttack : MonoBehaviour
     IEnumerator Attack()
     {
         isAttacking = true;
+        
         yield return new WaitForSeconds(attackTime); // 공격 애니메이션 진행 시간
         playerInput.p_isAttack = false;
         isAttacking = false;

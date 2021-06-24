@@ -62,6 +62,14 @@ public class PlayerMove : MonoBehaviour
         JumpCount++; // 카운트 올려주기 ( 다시 점프 못하게 )
     }
 
+    public void Hurt()
+    {
+        if (MoveState.Instance.direction == 1)
+            rigid.AddForce(new Vector2(2, 0) * doubleJumpPower, ForceMode2D.Impulse); //플레이어 넉백
+        else
+            rigid.AddForce(new Vector2(-2, 0) * doubleJumpPower, ForceMode2D.Impulse); //플레이어 넉백    
+    }
+
     private void Move()
     {
         if (playerInput.p_moveVector.x > 0) // 좌우반전

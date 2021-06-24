@@ -33,5 +33,15 @@ public class PlayerAnimationController : MonoBehaviour
         if (playerAttack.p_isAttacking == true) //공격 애니메이션
             animator.SetBool("attack", true);
         else animator.SetBool("attack", false);
+
+        if (AttackRange.Instance.isPlayerDead == true) //죽음 애니메이션
+            animator.SetBool("dead", true);
+
+        if (AttackRange.Instance.isPlayerHeart == true) //피격 애니메이션
+        {
+            animator.SetTrigger("Heart");
+            AttackRange.Instance.isPlayerHeart = false;
+        }
+            
     }
 }

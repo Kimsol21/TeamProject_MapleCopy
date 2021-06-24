@@ -16,7 +16,8 @@ public class FollowState : State
 
     void State.Update()
     {
-        FollowTarget();
+         if( AttackRange.Instance.StopEnemy  == false)
+            FollowTarget();
     }
 
     public void OnExit()
@@ -26,11 +27,18 @@ public class FollowState : State
 
     private void FollowTarget()
     {
-        if (enemy.P_target != null)
+        if (enemy.P_target != null)          
         {
             if(enemy.P_target.position.x > enemy.transform.position.x)
+            {
+                MoveState.Instance.direction = 1;
                 enemy.transform.localScale = new Vector3(1, 1, 1);
-            else enemy.transform.localScale = new Vector3(-1, 1, 1);
+            }              
+            else 
+            {
+                MoveState.Instance.direction = -1;
+                enemy.transform.localScale = new Vector3(-1, 1, 1);
+            }
             enemy.transform.position = Vector2.MoveTowards(enemy.transform.position, new Vector2(enemy.P_target.position.x, enemy.transform.position.y), followSpeed * Time.deltaTime);
         }
     }
