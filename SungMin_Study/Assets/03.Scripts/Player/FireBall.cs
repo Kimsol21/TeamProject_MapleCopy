@@ -26,10 +26,13 @@ public class FireBall : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy")) // 땅에 닿으면 점프 카운트 0으로 초기화
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             isExplode = true;
             animator.SetTrigger("isExplode");
+
+            BeatRange.Instance.enemyCurHealth -= 20;
+
             Destroy(gameObject, DestroyAnimPlayTime);
         }
     }

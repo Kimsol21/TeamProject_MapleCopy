@@ -6,9 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class AttackRange : MonoBehaviour
 {
+    public GameObject this1;
     public static AttackRange Instance;
     private Enemy parent;
     private Animator animator;
+
+    
 
     private float EnemyAttackDamage = 20.0f;
     public Slider HP_Slider;
@@ -94,6 +97,7 @@ public class AttackRange : MonoBehaviour
         else
         {
             isPlayerDead = true;
+            SceneManager.LoadScene("FailScene");
             StartCoroutine(LoadGameOverScene()); //체력 다 닳으면 게임오버 씬 출력.
         }
         
@@ -101,7 +105,9 @@ public class AttackRange : MonoBehaviour
 
     IEnumerator LoadGameOverScene()
     {
+        
         yield return new WaitForSeconds(1.2f);
         SceneManager.LoadScene("FailScene");
+        
     }
 }

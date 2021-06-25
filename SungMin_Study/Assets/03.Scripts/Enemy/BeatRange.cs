@@ -5,18 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class BeatRange : MonoBehaviour
 {
-
+    public static BeatRange Instance;
     public AudioClip clip1;//검에 맞는 사운드
     public AudioClip clip2;//파이어볼에 맞는 사운드
+    private Animator animator;
+
+    public bool isWin = false;
 
     public GameObject enemy1;
 
-    private float enemyCurHealth;
+    public float enemyCurHealth;
     private float enemyMaxHealth = 100;
 
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponentInParent<Animator>();
+        Instance = this;
         enemyCurHealth = enemyMaxHealth;
     }
 
@@ -30,7 +35,7 @@ public class BeatRange : MonoBehaviour
     {
         if (collision.tag == "Fireball")
         {
-            enemyCurHealth -= 50;
+            //enemyCurHealth -= 50;
             SoundManager.instance.SFXPlay("hit", clip2);
         }
 
@@ -57,8 +62,10 @@ public class BeatRange : MonoBehaviour
 
     IEnumerator EnemyDead()
     {
-        Destroy(enemy1, 0.5f);
+        Destroy(enemy1);
+        isWin = true;
         yield return new WaitForSeconds(2.0f);
+        isWin = true;
         SceneManager.LoadScene("SuccessScene");
     }
 }

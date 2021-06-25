@@ -38,11 +38,6 @@ public class Enemy : MonoBehaviour
     }
 
 
-    /*IEnumerator EnemyDead()
-    {
-        
-        yield return new WaitForSeconds(0.833f);
-        Destroy()
-    }*/
+    
 
 }
